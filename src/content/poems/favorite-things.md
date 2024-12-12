@@ -1,6 +1,6 @@
 ---
 title: "Favorite Things"
-date: "14th Nov"
+date: "14th Nov 24"
 ---
 
 My favorite color? It changes with light,

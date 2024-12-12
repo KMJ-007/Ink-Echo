@@ -1,6 +1,6 @@
 ---
 title: "Solitude"
-date: "12th Dec"
+date: "12th Dec 24"
 ---
 
 i feel like nothing,
