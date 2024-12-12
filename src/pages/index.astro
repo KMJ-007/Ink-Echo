@@ -1,0 +1,76 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PoemCard from "../components/PoemCard.astro";
+import { getCollection } from "astro:content";
+import { parseDate } from "../utils/dateUtils";
+
+const poems = await getCollection("poems");
+const sortedPoems = poems.sort((a, b) => {
+  const dateA = parseDate(a.data.date);
+  const dateB = parseDate(b.data.date);
+  return dateB.getTime() - dateA.getTime();
+});
+
+const baseUrl = Astro.url.origin;
+---
+
+<Layout title="Ink & Echo">
+  <main>
+    <h1 class="title">Ink <span class="accent">& </span>Echo</h1>
+
+    <div class="poems">
+      {
+        sortedPoems.map((poem) => (
+          <PoemCard
+            title={poem.data.title}
+            date={poem.data.date}
+            content={poem.body}
+            url={`${baseUrl}/#${poem.slug}`}
+            id={poem.slug}
+          />
+        ))
+      }
+    </div>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: auto;
+    padding: 2rem;
+    max-width: 800px;
+    min-height: 100vh;
+  }
+
+  .title {
+    font-family: "Playfair Display", serif;
+    font-size: 3.5rem;
+    text-align: center;
+    margin-bottom: 4rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: var(--primary-color);
+  }
+
+  .accent {
+    font-style: italic;
+    color: #825b5c;
+  }
+
+  .poems {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  @media (max-width: 600px) {
+    main {
+      padding: 1rem;
+    }
+
+    .title {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+  }
+</style>

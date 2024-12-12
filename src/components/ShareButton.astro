@@ -1,0 +1,76 @@
+---
+interface Props {
+    url: string;
+    title: string;
+}
+
+const { url, title } = Astro.props;
+
+const shareData = {
+    twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+    linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`,
+};
+---
+
+<div class="share-buttons">
+    <span class="share-text">Share this poem:</span>
+    <div class="social-buttons">
+        <a href={shareData.twitter} target="_blank" rel="noopener noreferrer" class="share-button twitter">
+            Twitter
+        </a>
+        <a href={shareData.facebook} target="_blank" rel="noopener noreferrer" class="share-button facebook">
+            Facebook
+        </a>
+        <a href={shareData.linkedin} target="_blank" rel="noopener noreferrer" class="share-button linkedin">
+            LinkedIn
+        </a>
+    </div>
+</div>
+
+<style>
+    .share-buttons {
+        margin-top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .share-text {
+        font-size: 0.9rem;
+        color: var(--primary-color);
+        font-style: italic;
+    }
+
+    .social-buttons {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .share-button {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 0.8rem;
+        transition: opacity 0.3s ease;
+    }
+
+    .share-button:hover {
+        opacity: 0.8;
+    }
+
+    .twitter {
+        background-color: #1DA1F2;
+        color: white;
+    }
+
+    .facebook {
+        background-color: #4267B2;
+        color: white;
+    }
+
+    .linkedin {
+        background-color: #0077b5;
+        color: white;
+    }
+</style>

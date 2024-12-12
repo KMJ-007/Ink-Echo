@@ -1,0 +1,67 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="A collection of personal poetry" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<script>
+  // Handle hash navigation on both page load and hash changes
+  function scrollToHash() {
+    if (window.location.hash) {
+      setTimeout(() => {
+        const element = document.querySelector(window.location.hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100); // Small delay to ensure content is loaded
+    }
+  }
+
+  window.addEventListener('load', scrollToHash);
+  window.addEventListener('hashchange', scrollToHash);
+</script>
+
+<style is:global>
+  :root {
+    --primary-color: #9b6b6c;
+    --text-color: #4a4a4a;
+    --background-color: #f5e6e8;
+    --font-title: 'Playfair Display', serif;
+    --font-content: 'Lora', serif;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html {
+    font-family: "Lora", serif;
+    background: var(--background-color);
+    scroll-behavior: smooth;
+  }
+  body {
+    min-height: 100vh;
+    background:
+      linear-gradient(rgba(245, 230, 232, 0.9), rgba(245, 230, 232, 0.9))
+  }
+</style>

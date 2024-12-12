@@ -1,0 +1,108 @@
+---
+import ShareIcon from './ShareIcon.astro';
+import { marked } from 'marked';
+
+interface Props {
+    title: string;
+    date: string;
+    content: string;
+    url: string;
+    id: string;
+}
+
+const { title, date, content, url, id } = Astro.props;
+const htmlContent = marked(content);
+---
+
+<article class="poem" id={id}>
+    <header class="poem-header">
+        <div class="date-container">
+            <div class="date">{date}</div>
+        </div>
+    </header>
+    <h2 class="poem-title">{title}</h2>
+    <div class="content" set:html={htmlContent} />
+    <footer class="poem-footer">
+        <ShareIcon url={url} />
+    </footer>
+</article>
+
+<style>
+    .poem {
+        padding: 2.5rem;
+        background: url('/texture.jpg') center/cover;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        position: relative;
+        transition: transform 0.3s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .poem::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 8px;
+        z-index: -1;
+    }
+
+    .poem:hover {
+        transform: translateY(-5px);
+    }
+
+    .poem-header {
+        margin-bottom: 1rem;
+    }
+
+    .date-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .date {
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        font-style: italic;
+    }
+
+    .poem-title {
+        font-family: var(--font-title);
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        letter-spacing: 0.02em;
+    }
+
+    .content {
+        font-family: var(--font-content);
+        font-size: 1.15rem;
+        line-height: 1.9;
+        color: var(--text-color);
+        position: relative;
+        white-space: pre-line;
+        letter-spacing: 0.01em;
+    }
+
+    .poem-footer {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(155, 107, 108, 0.2);
+    }
+
+    @media (max-width: 600px) {
+        .poem {
+            padding: 1.5rem;
+        }
+        
+        .content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+    }
+</style>
