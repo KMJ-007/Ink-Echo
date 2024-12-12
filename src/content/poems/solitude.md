@@ -1,5 +1,5 @@
 ---
-title: "Solitude's Embrace"
+title: "Solitude"
 date: "12th Dec"
 ---
 
