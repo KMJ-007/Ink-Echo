@@ -1,5 +1,5 @@
 ---
-title: "Favorite Things"
+title: "Summer"
 date: "14th Nov 24"
 ---
 
