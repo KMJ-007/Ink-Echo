@@ -1,6 +1,6 @@
 ---
 title: "Loosing"
-date: "14th Nov 24"
+date: "14th Dec 24"
 ---
 
 It's not about place, they say,
