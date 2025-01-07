@@ -4,9 +4,11 @@ export function parseDate(dateStr: string): Date {
     'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
   };
   
-  const [day, month] = dateStr.split(' ');
+  // Parse "8th Jan 25" format
+  const [day, month, year] = dateStr.split(' ');
   const numericDay = parseInt(day);
   const monthIndex = months[month.slice(0, 3)];
+  const fullYear = 2000 + parseInt(year); // Convert "25" to "2025"
   
-  return new Date(2024, monthIndex, numericDay);
+  return new Date(fullYear, monthIndex, numericDay);
 }
